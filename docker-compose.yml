@@ -1,0 +1,27 @@
+version: "3.9"
+
+services:
+  careeroo_db:
+    container_name: careeroodb_container
+    image: mongo:latest
+    restart: always
+    volumes:
+      - careeroo_db:/data/db
+  carerro_api:
+    build: .
+    ports:
+      - 5000:5000
+    volumes:
+      - ".:/usr/src/app:rw"
+      - "/usr/src/app/node_modules"
+    environment:
+      DATABASE_URL: mongodb+srv://admin:meD%21123@cluster0.qjjrtvd.mongodb.net/careero_db
+      PORT: 5000
+      JWT_SECRETCODE: Jk588qFcNr+nGAVETR8fuzaVZuhk5vwB@cDR26sY62ykWFWvFyJRnNdkRHyYW2VH.eUUJ
+      USER_SESSION: KNp726FwR3J3Bf6D3wqVrGWUgdzYFkpa23
+      PUBLIC_SESSION: KNp726FwR3J3Bf6D3wqVrGWUgdzYFkpa32
+    depends_on:
+      - careeroo_db
+
+volumes:
+  careeroo_db: {}
